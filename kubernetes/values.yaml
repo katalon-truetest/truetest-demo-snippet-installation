@@ -1,0 +1,31 @@
+controller:
+  # Enable snippet annotations to allow script injection via Ingress
+  allowSnippetAnnotations: true
+  
+  # Disable annotation validation that blocks "risky" snippets
+  enableAnnotationValidations: false
+
+  # The rest are existing configurations
+  
+  service:
+    type: NodePort
+    nodePorts:
+      http: 31080
+      https: 31443
+
+  metrics:
+    enabled: true
+
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 100
+
+  resources:
+    requests:
+      cpu: 10m
+      memory: 128Mi
+
+defaultBackend:
+  enabled: true
