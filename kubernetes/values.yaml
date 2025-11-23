@@ -5,6 +5,10 @@ controller:
   # Disable annotation validation that blocks "risky" snippets
   enableAnnotationValidations: false
 
+  # IMPORTANT: Set the ConfigMap for Controller
+  config:
+    annotations-risk-level: "Critical"
+
   # The rest are existing configurations
   
   service:
