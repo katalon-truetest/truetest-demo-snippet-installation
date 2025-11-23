@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: your-app-ingress
+  namespace: your-namespace
+  annotations:
+    # Enable response body modification
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      sub_filter '</head>' '<script defer async client-code="YOUR-CLIENT-CODE" src="https://static.katalon.com/libs/traffic-agent/v1/traffic-agent.min.js"></script></head>';
+      sub_filter_once on;
+      sub_filter_types text/html;
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: your-domain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: your-service
+            port:
+              number: 80
